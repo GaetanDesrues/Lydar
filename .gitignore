@@ -1,0 +1,7 @@
+.DS_S*
+.idea
+__pycache__
+venv
+old
+data
+test_*
