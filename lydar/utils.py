@@ -1,5 +1,5 @@
 import logging
-from pathlib import Path
+from pathlib import Path, PosixPath
 import time
 import numpy as np
 import json
@@ -24,6 +24,8 @@ class CustomEncoder(json.JSONEncoder):
             return z.tolist()
         elif isinstance(z, SceneObject):
             return z.to_dict()
+        elif isinstance(z, PosixPath):
+            return str(z.absolute())
         else:
             return super().default(z)
 
