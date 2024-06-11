@@ -3,5 +3,5 @@
 __pycache__
 venv
 old
-data
 test_*
+out

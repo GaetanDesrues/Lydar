@@ -3,4 +3,3 @@ scipy
 pyvista
 pyvistaqt
 pyqt5
-randomname
