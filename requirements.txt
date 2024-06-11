@@ -3,3 +3,5 @@ scipy
 pyvista
 pyvistaqt
 pyqt5
+
+open3d

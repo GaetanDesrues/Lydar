@@ -15,10 +15,10 @@ def main():
     root = Path(__file__).parent / "out"
     root.mkdir(exist_ok=True)
 
-    show = False
+    show = True
     scene = LydarScene(root, off_screen=not show)
-    lidar_res = {'h_res': 5, 'v_res': 5}
-    # lidar_res = {'h_res': 0.5, 'v_res': 1}
+    # lidar_res = {'h_res': 3, 'v_res': 3}
+    lidar_res = {'h_res': 0.5, 'v_res': 1}
 
     lidar_1 = Lidar('lidar_1', [1, 1, 1], R.from_rotvec(
         np.deg2rad(20) * Y), color='g', **lidar_res)
@@ -54,7 +54,8 @@ def main():
 
     def take_screenshot():
         scene.plotter.screenshot(root / "pts.png")
-        scene.plotter.close()
+        if not show:
+            scene.plotter.close()
 
     scene.plotter.add_callback(take_screenshot, 1000, 1)
     scene.render(show=show)

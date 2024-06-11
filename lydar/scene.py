@@ -44,7 +44,7 @@ class LydarScene:
             with Timer() as t:
                 pts = get_points(lid)
 
-                # For each object in the scene (parallel for each object)
+                # For each object in the scene
                 worker = partial(
                     intersect, origin=lid.position, ray_points=pts)
                 # with mp.Pool(min(mp.cpu_count(), len(meshes))) as p:
@@ -73,11 +73,16 @@ class LydarScene:
         for lid, pts_obj in intersections.items():
             c = self.scene_objects[lid].color
             pts_ = np.array([pt['x'] for pt in pts_obj])
+            # d_ = np.array([pt['dist'] for pt in pts_obj])
+            # h_ = np.array([pt['x'][2] for pt in pts_obj])
             self.plotter.add_points(
-                pts_, point_size=15, color=c, render_points_as_spheres=True)
-            # for pt in pts_obj:
-            #     self.plotter.add_mesh(
-            #         pv.Sphere(radius=0.1, center=pt['x']), color=c)
+                pts_,
+                point_size=15,
+                render_points_as_spheres=True,
+                color=c,
+                # scalars=h_,
+                # cmap='jet_r',
+            )
         log.debug(f"Finished to plot intersection points")
 
         # # For each mesh, reconstruct surface from intersected points

@@ -16,6 +16,11 @@ def dump_json(filename: str, data: dict):
         json.dump(data, f, cls=CustomEncoder, indent=4)
 
 
+def load_json(filename: str,  **kwargs):
+    with open(filename, "r") as f:
+        return json.load(f, **kwargs)
+
+
 class CustomEncoder(json.JSONEncoder):
     def default(self, z):
         from lydar.objects import SceneObject
